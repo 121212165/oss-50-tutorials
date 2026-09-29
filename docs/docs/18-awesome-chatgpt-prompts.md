@@ -1,7 +1,7 @@
 ---
 num: 18
 title: awesome-chatgpt-prompts：十万星老牌提示词仓库，学它的组织方式比抄内容更值钱
-repo: f/awesome-chatgpt-prompts
+repo: f/prompts.chat
 category: AI 写作 / 中文文本处理
 audio: 18.mp3
 minutes: 7
@@ -9,7 +9,7 @@ minutes: 7
 
 ## 它是什么（30 秒版）
 
-f/awesome-chatgpt-prompts 是提示词开源化的鼻祖之一，GitHub 星标十几万，是"awesome list"文化的代表作。核心就是一份 README/CSV：几百条精心写的角色化提示词（"你是 Linux 终端""你是面试官""你是旅行向导"），每条都以 `Act as ...` 开头，社区通过 PR 持续贡献。对今天更强的模型来说，部分 prompt 显得朴素，但它是学"提示词如何被大规模组织与维护"的最佳标本。
+f/prompts.chat 是提示词开源化的鼻祖之一，GitHub 星标十几万，是"awesome list"文化的代表作。核心就是一份 README/CSV：几百条精心写的角色化提示词（"你是 Linux 终端""你是面试官""你是旅行向导"），每条都以 `Act as ...` 开头，社区通过 PR 持续贡献。对今天更强的模型来说，部分 prompt 显得朴素，但它是学"提示词如何被大规模组织与维护"的最佳标本。
 
 ## 为什么对你超有帮助（结合你的具体项目说）
 
@@ -33,7 +33,7 @@ f/awesome-chatgpt-prompts 是提示词开源化的鼻祖之一，GitHub 星标�
 ## 上手路径（第一步做什么，命令级）
 
 ```bash
-git clone https://github.com/f/awesome-chatgpt-prompts.git
+git clone https://github.com/f/prompts.chat.git
 cd awesome-chatgpt-prompts
 # 用 Excel/Obsidian 直接打开 prompts.csv，或命令行看前几行：
 head prompts.csv

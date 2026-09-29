@@ -1,7 +1,7 @@
 ---
 num: 10
 title: CRXJS：给"手写 manifest"的你补上 Vite 的全部红利的 Vite 插件
-repo: crxjs/crxjs
+repo: crxjs/chrome-extension-tools
 category: 浏览器扩展 / 油猴
 audio: 10.mp3
 minutes: 6
@@ -35,4 +35,4 @@ CRXJS 的工作原理一句话：**它读你的 manifest.json，把里面声明�
 
 CRXJS 教的是"寄生式现代化"：不重写项目，把新工具作为插件嫁接到旧结构上。这套思路适用于你的一切存量资产——老脚本、老插件、老站点，都可以先问"有没有一个 Vite 插件/包装层能让它提速"，而不是推倒重来。渐进优于重写，是工程的一级结论。
 
-> 冷知识：CRXJS 仓库原名 crxjs/vite-plugin，后更名为 crxjs/crxjs——开源项目把自己的定位从"插件"升级成"品牌"的典型一跃。
+> 冷知识：CRXJS 仓库原名 crxjs/vite-plugin，后更名为 crxjs/chrome-extension-tools——开源项目把自己的定位从"插件"升级成"品牌"的典型一跃。

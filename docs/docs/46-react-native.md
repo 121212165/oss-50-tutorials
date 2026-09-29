@@ -1,7 +1,7 @@
 ---
 num: 46
 title: React Native：12.6 万 star 的"用 React 写原生 App"，你最短学习曲线的移动端路线
-repo: facebook/react-native
+repo: react/react-native
 category: 跨平台 / 鸿蒙 / 移动
 audio: 46.mp3
 minutes: 5

@@ -1,7 +1,7 @@
 ---
 num: 15
 title: MetaGPT：7 万 star 的"软件公司模拟器"，SOP 思维的教科书
-repo: geekan/MetaGPT
+repo: FoundationAgents/MetaGPT
 category: AI Agent / 编码智能体
 audio: 15.mp3
 minutes: 6

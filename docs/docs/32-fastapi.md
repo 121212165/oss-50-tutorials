@@ -1,7 +1,7 @@
 ---
 num: 32
 title: FastAPI：10.2 万 star 的 Python 后端之王，你的动物园导览已在用
-repo: tiangolo/fastapi
+repo: fastapi/fastapi
 category: Web 开发 / 部署
 audio: 32.mp3
 minutes: 6

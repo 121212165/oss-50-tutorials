@@ -1,7 +1,7 @@
 ---
 num: 11
 title: OpenHands：89k star 的编码 Agent 控制中枢，看开源 Agent "长什么样"的全景样本
-repo: All-Hands-AI/OpenHands
+repo: OpenHands/OpenHands
 category: AI Agent / 编码智能体
 audio: 11.mp3
 minutes: 7

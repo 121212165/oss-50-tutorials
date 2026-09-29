@@ -1,7 +1,7 @@
 ---
 num: 06
 title: obsidian-kanban：Markdown 里的看板，学习"视图类插件"的最佳小样本
-repo: mgmeyers/obsidian-kanban
+repo: community-archive/obsidian-kanban
 category: Obsidian 插件开发
 audio: 06.mp3
 minutes: 6
