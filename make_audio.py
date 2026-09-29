@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-"""把 docs/*.md 教程转成 audio/NN.mp3，供教程站播放。"""
+"""把 docs/docs/*.md 教程转成 docs/audio/NN.mp3，供教程站播放。
+
+用法：py make_audio.py            # 全量（已存在且非空的会跳过）
+      py make_audio.py 07 jieba    # 只处理文件名含该关键词的
+"""
 import re, glob, os, sys, asyncio
 import edge_tts
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-DOCS = os.path.join(ROOT, "docs")
-AUDIO = os.path.join(ROOT, "audio")
+DOCS = os.path.join(ROOT, "docs", "docs")
+AUDIO = os.path.join(ROOT, "docs", "audio")
 VOICE = "zh-CN-XiaoxiaoNeural"
 RATE = "+12%"
 

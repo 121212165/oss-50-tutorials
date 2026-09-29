@@ -1,0 +1,33 @@
+name: check
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 3 * * 1'   # 每周一核对一次上游仓库状态
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 校验 50 篇骨架与音频齐备
+        run: python scripts/check_structure.py
+
+      - name: 校验上游仓库（改名/归档/停更/star 漂移）
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/check_upstream.py
+
+      - name: 校验 data.json 未过期
+        run: |
+          python scripts/build_data.py
+          git diff --exit-code docs/data.json || {
+            echo "::error::data.json 与实际文件不一致，请本地运行 python scripts/build_data.py 后提交";
+            exit 1;
+          }

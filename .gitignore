@@ -1,3 +1,4 @@
-/audio/
 /digests/
 /source-docs/
+__pycache__/
+*.pyc
