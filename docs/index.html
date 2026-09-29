@@ -3,16 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>开源军火库 50 课 · 零基础拆解教程</title>
+<title>开源军火库 50 课 · 零基础开源项目拆解</title>
+<meta name="description" content="50 个开源项目的零基础拆解教程：它是什么、架构怎么组织、命令级上手路径、避坑与横向对比。每篇配 MP3 音频版。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="开源军火库 50 课 · 零基础开源项目拆解">
+<meta property="og:description" content="50 个开源项目的拆解教程 + 音频版，零基础可读。">
+<link rel="canonical" href="https://121212165.github.io/oss-50-tutorials/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
 <style>
 :root{--bg:#0f1115;--card:#1a1d24;--card2:#21252e;--tx:#e8eaf0;--tx2:#9aa3b2;--ac:#7c8cff;--ac2:#ffb86c;--ok:#4ade80}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--tx);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;line-height:1.75}
 a{color:var(--ac);text-decoration:none}
-header{padding:64px 24px 40px;text-align:center;background:linear-gradient(180deg,#171b26,var(--bg))}
-header h1{font-size:2.1rem;font-weight:800}
-header h1 span{color:var(--ac2)}
-header p{color:var(--tx2);margin-top:12px;max-width:640px;margin-inline:auto}
+header.site{padding:64px 24px 40px;text-align:center;background:linear-gradient(180deg,#171b26,var(--bg))}
+header.site h1{font-size:2.1rem;font-weight:800}
+header.site h1 span{color:var(--ac2)}
+header.site p{color:var(--tx2);margin-top:12px;max-width:640px;margin-inline:auto}
 .stats{display:flex;gap:28px;justify-content:center;margin-top:24px;color:var(--tx2);font-size:.92rem;flex-wrap:wrap}
 .stats b{color:var(--tx);font-size:1.15rem;margin-right:4px}
 main{max-width:1080px;margin:0 auto;padding:24px}
@@ -20,26 +26,26 @@ main{max-width:1080px;margin:0 auto;padding:24px}
 .filters button{background:var(--card);border:1px solid #2b303c;color:var(--tx2);padding:7px 16px;border-radius:999px;cursor:pointer;font-size:.88rem;transition:.15s}
 .filters button:hover{color:var(--tx)}
 .filters button.on{background:var(--ac);border-color:var(--ac);color:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px}
 .card{background:var(--card);border:1px solid #262b36;border-radius:14px;padding:20px;transition:.15s;display:flex;flex-direction:column;gap:8px;position:relative}
 .card:hover{border-color:var(--ac);transform:translateY(-2px)}
 .card .num{position:absolute;top:14px;right:16px;font-size:1.6rem;font-weight:800;color:#2b303c}
 .card .cat{font-size:.75rem;color:var(--ac2);letter-spacing:.5px}
 .card h3{font-size:1.02rem;line-height:1.45}
 .card .repo{font-size:.8rem;color:var(--tx2);font-family:Consolas,monospace}
-.card .meta{margin-top:auto;padding-top:10px;display:flex;gap:14px;color:var(--tx2);font-size:.82rem}
-.player{position:fixed;left:0;right:0;bottom:0;background:var(--card2);border-top:1px solid #2b303c;padding:10px 20px;display:none;align-items:center;gap:14px;z-index:9}
-.player.on{display:flex}
-.player audio{flex:1;height:36px}
-.player .t{font-size:.85rem;color:var(--tx2);max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .meta{margin-top:auto;padding-top:10px;display:flex;gap:14px;color:var(--tx2);font-size:.82rem;flex-wrap:wrap}
+.error{background:#3a1d1d;border:1px solid #7c2f2f;border-radius:12px;padding:16px 20px;margin:20px 0;color:#ffd9d9}
 /* article */
-article{max-width:820px;margin:0 auto;padding:32px 22px 140px}
+article{max-width:820px;margin:0 auto;padding:32px 22px 100px}
 article h1{font-size:1.7rem;line-height:1.4;margin-bottom:6px}
 .article-meta{color:var(--tx2);font-size:.85rem;margin-bottom:8px}
-.article-meta .repo{font-family:Consolas,monospace;color:var(--ac)}
+.article-meta .repo{font-family:Consolas,monospace}
 .audiobar{background:var(--card);border:1px solid #2b303c;border-radius:12px;padding:14px 16px;margin:18px 0 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .audiobar audio{flex:1;min-width:240px;height:36px}
 .audiobar .label{font-size:.85rem;color:var(--ac2)}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin:-12px 0 24px;font-size:.85rem}
+.links a{background:var(--card);border:1px solid #2b303c;border-radius:8px;padding:5px 12px;color:var(--tx2)}
+.links a:hover{color:var(--ac);border-color:var(--ac)}
 article h2{font-size:1.22rem;margin:34px 0 10px;padding-left:12px;border-left:4px solid var(--ac)}
 article h3{font-size:1.05rem;margin:24px 0 8px}
 article p{margin:10px 0;color:#cfd5e1}
@@ -49,116 +55,174 @@ article li{margin:6px 0;color:#cfd5e1}
 article code{background:var(--card2);padding:2px 7px;border-radius:6px;font-size:.88em;font-family:Consolas,monospace;color:#a8e0ff}
 article pre{background:var(--card2);padding:16px;border-radius:12px;overflow-x:auto;margin:14px 0;border:1px solid #2b303c}
 article pre code{background:none;padding:0;display:block;line-height:1.6}
-article table{border-collapse:collapse;margin:14px 0;width:100%}
-article th,article td{border:1px solid #2b303c;padding:8px 12px;font-size:.9rem}
 .back{display:inline-block;margin-bottom:20px;color:var(--tx2);font-size:.9rem}
 .back:hover{color:var(--ac)}
 .nav2{display:flex;justify-content:space-between;margin-top:44px;gap:12px;flex-wrap:wrap}
 .nav2 a{background:var(--card);border:1px solid #2b303c;padding:10px 18px;border-radius:10px;font-size:.9rem}
-footer{text-align:center;color:var(--tx2);font-size:.8rem;padding:30px 20px 120px}
+footer{text-align:center;color:var(--tx2);font-size:.8rem;padding:30px 20px 60px}
+@media (max-width:600px){header.site{padding:40px 16px 28px}header.site h1{font-size:1.6rem}article{padding:24px 16px 80px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>开源军火库 <span>50</span> 课</h1>
-  <p>基于你的 GitHub 仓库画像定制：50 个对创作者最有用的开源项目，逐个真拆解，零基础讲解，每篇配音频。</p>
-  <div class="stats">
-    <span><b>50</b>篇拆解</span><span><b>10</b>个方向</span><span><b>50</b>条音频</span><span>听读双轨</span>
-  </div>
-</header>
-<main>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
-</main>
-<div class="player" id="player">
-  <span class="t" id="ptitle"></span>
-  <audio id="paudio" controls preload="none"></audio>
-  <button class="filters" style="all:unset;cursor:pointer;color:var(--tx2);font-size:1.2rem" onclick="closePlayer()">✕</button>
-</div>
-<footer>由 AI 拆解生成 · 内容基于各项目官方 README 与公开资料 · 生成于 2026-09-28</footer>
+<div id="app"></div>
+<noscript><p style="text-align:center;padding:24px;color:#9aa3b2">这个站点需要 JavaScript 来渲染 Markdown 教程。仓库里 <code>docs/docs/</code> 目录下有全部 50 篇的 Markdown 原文，可直接阅读。</p></noscript>
 <script>
-let DATA=[];
-function getNum(){const m=location.hash.match(/^#(\d+)/);return m?+m[1]:null}
-async function load(){
-  const r=await fetch('data.json?v=3');DATA=await r.json();
-  const n=getNum();
-  if(n)renderArticle(n);else renderList();
+let DATA = [];
+const app = document.getElementById('app');
+const SITE = '开源军火库 50 课';
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-function renderList(){
-  const cats=[...new Set(DATA.map(d=>d.category))];
-  const fEl=document.getElementById('filters');
-  fEl.innerHTML='<button class="on" data-c="all">全部</button>'+cats.map(c=>`<button data-c="${c}">${c}</button>`).join('');
-  fEl.onclick=e=>{if(e.target.dataset.c){
-    fEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===e.target));
-    draw(e.target.dataset.c)}};
+function pad(n) { return String(n).padStart(2, '0'); }
+function getNum() { const m = location.hash.match(/^#(\d+)/); return m ? +m[1] : null; }
+
+async function boot() {
+  try {
+    const r = await fetch('data.json?v=4');
+    if (!r.ok) throw new Error('data.json HTTP ' + r.status);
+    DATA = await r.json();
+  } catch (e) {
+    app.innerHTML = '<main><div class="error"><b>目录加载失败</b><br>' + esc(e.message) + '</div></main>';
+    throw e;
+  }
+  route();
+}
+function route() { const n = getNum(); if (n) renderArticle(n); else renderList(); }
+
+function summary() {
+  const words = DATA.reduce((s, d) => s + d.words, 0);
+  const audio = DATA.reduce((s, d) => s + (d.audioMinutes || 0), 0);
+  const cats = new Set(DATA.map(d => d.category)).size;
+  return { words, audio, cats };
+}
+function renderList() {
+  document.title = SITE + ' · 零基础开源项目拆解';
+  const s = summary();
+  const cats = [...new Set(DATA.map(d => d.category))];
+  app.innerHTML = `
+  <header class="site">
+    <h1>开源军火库 <span>${DATA.length}</span> 课</h1>
+    <p>${DATA.length} 个开源项目逐个真拆解：它是什么、架构怎么组织、命令级上手路径、避坑与横向对比，每篇配音频。</p>
+    <div class="stats">
+      <span><b>${DATA.length}</b>篇拆解</span>
+      <span><b>${s.cats}</b>个方向</span>
+      <span><b>${(s.words / 10000).toFixed(1)}</b>万字</span>
+      <span><b>${Math.round(s.audio / 60 * 10) / 10}</b>小时音频</span>
+    </div>
+  </header>
+  <main>
+    <div class="filters" id="filters">
+      <button class="on" data-c="all">全部</button>
+      ${cats.map(c => `<button data-c="${esc(c)}">${esc(c)}</button>`).join('')}
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+  ${foot()}`;
+  const fEl = document.getElementById('filters');
+  fEl.onclick = e => {
+    if (!e.target.dataset.c) return;
+    fEl.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === e.target));
+    draw(e.target.dataset.c);
+  };
   draw('all');
 }
-function draw(cat){
-  const g=document.getElementById('grid');
-  g.innerHTML=DATA.filter(d=>cat==='all'||d.category===cat).map(d=>`
-   <a class="card" href="#${d.num}" onclick="nav(event,${d.num})">
-     <span class="num">${String(d.num).padStart(2,'0')}</span>
-     <span class="cat">${d.category}</span>
-     <h3>${d.title}</h3>
-     <span class="repo">${d.repo}</span>
-     <span class="meta"><span>🎧 ${d.minutes} 分钟音频</span><span>📖 ${d.words} 字</span></span>
+function draw(cat) {
+  const g = document.getElementById('grid');
+  g.innerHTML = DATA.filter(d => cat === 'all' || d.category === cat).map(d => `
+   <a class="card" href="#${d.num}">
+     <span class="num">${pad(d.num)}</span>
+     <span class="cat">${esc(d.category)}</span>
+     <h3>${esc(d.title)}</h3>
+     <span class="repo">${esc(d.repo)}</span>
+     <span class="meta">
+       <span>🎧 ${d.audioMinutes} 分钟</span>
+       <span>📖 ${d.words} 字</span>
+       <span>约 ${d.readMinutes} 分钟读完</span>
+     </span>
    </a>`).join('');
 }
-async function nav(e,n){e.preventDefault();location.hash=n;renderArticle(n);window.scrollTo(0,0)}
-let mdCache={};
-async function renderArticle(n){
-  const d=DATA.find(x=>x.num===n);if(!d)return;
-  let html=mdCache[n];
-  if(!html){
-    const md=await (await fetch(`docs/${String(n).padStart(2,'0')}.md?v=3`)).text();
-    html=window.mdToHtml?mdToHtml(md):simpleMd(md);mdCache[n]=html;
+async function renderArticle(n) {
+  const d = DATA.find(x => x.num === n);
+  if (!d) { location.hash = ''; return renderList(); }
+  document.title = `${pad(n)} · ${d.title.split('：')[0]} · ${SITE}`;
+  let html;
+  try {
+    const r = await fetch('docs/' + d.file + '?v=4');
+    if (!r.ok) throw new Error('正文 ' + d.file + ' HTTP ' + r.status);
+    html = simpleMd(await r.text());
+  } catch (e) {
+    app.innerHTML = `<main><div class="error"><b>正文加载失败</b><br>${esc(e.message)}
+      </div><p><a href="#/" onclick="location.hash='';route();return false">← 返回目录</a>
+      ｜<a href="${d.url}" target="_blank" rel="noopener">在 GitHub 看这个项目</a></p></main>`;
+    return;
   }
-  const prev=DATA.find(x=>x.num===n-1),next=DATA.find(x=>x.num===n+1);
-  document.body.innerHTML=`<article>
-   <a class="back" href="#" onclick="event.preventDefault();location.hash='';boot()">← 返回全部 50 课</a>
-   <h1>${String(n).padStart(2,'0')} · ${d.title}</h1>
-   <div class="article-meta"><span class="repo">${d.repo}</span> · ${d.category} · 约 ${d.minutes} 分钟读完</div>
-   <div class="audiobar"><span class="label">🎧 音频版</span>
-     <audio id="artAudio" controls preload="none" src="audio/${String(n).padStart(2,'0')}.mp3"></audio>
-     <a href="audio/${String(n).padStart(2,'0')}.mp3" download>下载</a></div>
-   ${html}
-   <div class="nav2">
-     ${prev?`<a href="#${prev.num}" onclick="nav(event,${prev.num})">← ${String(prev.num).padStart(2,'0')} ${prev.title.split('：')[0]}</a>`:'<span></span>'}
-     ${next?`<a href="#${next.num}" onclick="nav(event,${next.num})" style="margin-left:auto">${String(next.num).padStart(2,'0')} ${next.title.split('：')[0]} →</a>`:''}
-   </div></article>
-   <footer>开源军火库 50 课 · <a href="#" onclick="event.preventDefault();boot()">返回列表</a></footer>`;
+  const prev = DATA.find(x => x.num === n - 1), next = DATA.find(x => x.num === n + 1);
+  app.innerHTML = `
+  <article>
+    <a class="back" href="#/">← 返回全部 ${DATA.length} 课</a>
+    <h1>${pad(n)} · ${esc(d.title)}</h1>
+    <div class="article-meta"><a class="repo" href="${d.url}" target="_blank" rel="noopener">${esc(d.repo)}</a>
+      · ${esc(d.category)} · ${d.words} 字 · 约 ${d.readMinutes} 分钟读完</div>
+    <div class="audiobar"><span class="label">🎧 音频版 ${d.audioMinutes} 分钟</span>
+      <audio controls preload="none" src="audio/${pad(n)}.mp3"></audio>
+      <a href="audio/${pad(n)}.mp3" download>下载</a></div>
+    <div class="links">
+      <a href="${d.url}" target="_blank" rel="noopener">官方仓库</a>
+      <a href="${d.url}/issues" target="_blank" rel="noopener">Issues</a>
+      <a href="${d.url}/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="${d.url}/blob/master/README.md" target="_blank" rel="noopener">上游 README</a>
+    </div>
+    ${html}
+    <div class="nav2">
+      ${prev ? `<a href="#${prev.num}">← ${pad(prev.num)} ${esc(prev.title.split('：')[0])}</a>` : '<span></span>'}
+      ${next ? `<a href="#${next.num}" style="margin-left:auto">${pad(next.num)} ${esc(next.title.split('：')[0])} →</a>` : ''}
+    </div>
+  </article>
+  <footer>${SITE} · <a href="#/">返回列表</a> · 内容基于各项目官方 README 与公开资料整理</footer>`;
+  window.scrollTo(0, 0);
 }
-function closePlayer(){document.getElementById('player').classList.remove('on');document.getElementById('paudio').pause()}
-function boot(){location.hash='';window.location.reload()}
-// 极简 Markdown 渲染（转义安全）
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function simpleMd(md){
-  md=md.replace(/^---\n[\s\S]*?\n---\n/,'');
-  const lines=md.split('\n');let out=[],inCode=false,inList=false,inQuote=false;
-  for(let L of lines){
-    if(/^```/.test(L)){inCode=!inCode;out.push(inCode?'<pre><code>':'</code></pre>');continue}
-    if(inCode){out.push(esc(L));continue}
-    let h=L.match(/^(#{1,4})\s+(.*)/);
-    if(h){if(inList){out.push('</ul>');inList=false}if(inQuote){out.push('</blockquote>');inQuote=false}
-      const l=h[1].length;out.push(`<h${l}>${inline(h[2])}</h${l}>`);continue}
-    if(/^>\s?/.test(L)){if(!inQuote){out.push('<blockquote>');inQuote=true}out.push(inline(L.replace(/^>\s?/,'')));continue}
-    if(inQuote){out.push('</blockquote>');inQuote=false}
-    if(/^[-*]\s+/.test(L)){if(!inList){out.push('<ul>');inList=true}out.push(`<li>${inline(L.replace(/^[-*]\s+/,''))}</li>`);continue}
-    if(/^\d+\.\s+/.test(L)){if(!inList){out.push('<ol>');inList=true}out.push(`<li>${inline(L.replace(/^\d+\.\s+/,''))}</li>`);continue}
-    if(inList){out.push(inList==='ol'?'</ol>':'</ul>');inList=false}
-    if(/^\s*$/.test(L)){continue}
+function foot() {
+  return `<footer>${SITE} · 由脚本从 Markdown 自动生成目录与指标 · <a href="https://github.com/121212165/oss-50-tutorials">源码仓库</a></footer>`;
+}
+// 极简 Markdown 渲染：所有文本先转义，再套标签。
+function inline(s) {
+  s = esc(s);
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  s = s.replace(/\[([^\]]+)\]\(([^)"'\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return s;
+}
+function simpleMd(md) {
+  md = md.replace(/^[\uFEFF]?---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
+  const out = [];
+  let inCode = false, list = null, quote = false;
+  const closeList = () => { if (list) { out.push(list === 'ol' ? '</ol>' : '</ul>'); list = null; } };
+  const closeQuote = () => { if (quote) { out.push('</blockquote>'); quote = false; } };
+  for (const L of md.split(/\r?\n/)) {
+    if (/^```/.test(L)) {
+      closeList(); closeQuote();
+      out.push(inCode ? '</code></pre>' : '<pre><code>');
+      inCode = !inCode; continue;
+    }
+    if (inCode) { out.push(esc(L)); continue; }
+    const h = L.match(/^(#{1,4})\s+(.*)/);
+    if (h) { closeList(); closeQuote(); out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); continue; }
+    if (/^>\s?/.test(L)) { closeList(); if (!quote) { out.push('<blockquote>'); quote = true; } out.push(inline(L.replace(/^>\s?/, ''))); continue; }
+    closeQuote();
+    if (/^[-*]\s+/.test(L)) { if (list !== 'ul') { closeList(); out.push('<ul>'); list = 'ul'; } out.push(`<li>${inline(L.replace(/^[-*]\s+/, ''))}</li>`); continue; }
+    if (/^\d+\.\s+/.test(L)) { if (list !== 'ol') { closeList(); out.push('<ol>'); list = 'ol'; } out.push(`<li>${inline(L.replace(/^\d+\.\s+/, ''))}</li>`); continue; }
+    if (/^\s*$/.test(L)) { closeList(); continue; }
+    closeList();
     out.push(`<p>${inline(L)}</p>`);
   }
-  if(inList)out.push('</ul>');if(inQuote)out.push('</blockquote>');
+  closeList(); closeQuote();
+  if (inCode) out.push('</code></pre>');
   return out.join('\n');
-  function inline(s){s=esc(s);
-    s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
-    s=s.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
-    s=s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
-    return s}
 }
-window.mdToHtml=simpleMd;
-load();
+window.addEventListener('hashchange', route);
+boot();
 </script>
 </body>
 </html>
