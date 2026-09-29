@@ -80,7 +80,7 @@ footer{text-align:center;color:var(--tx2);font-size:.8rem;padding:30px 20px 120p
 let DATA=[];
 function getNum(){const m=location.hash.match(/^#(\d+)/);return m?+m[1]:null}
 async function load(){
-  const r=await fetch('data.json');DATA=await r.json();
+  const r=await fetch('data.json?v=3');DATA=await r.json();
   const n=getNum();
   if(n)renderArticle(n);else renderList();
 }
@@ -110,7 +110,7 @@ async function renderArticle(n){
   const d=DATA.find(x=>x.num===n);if(!d)return;
   let html=mdCache[n];
   if(!html){
-    const md=await (await fetch(`docs/${String(n).padStart(2,'0')}.md`)).text();
+    const md=await (await fetch(`docs/${String(n).padStart(2,'0')}.md?v=3`)).text();
     html=window.mdToHtml?mdToHtml(md):simpleMd(md);mdCache[n]=html;
   }
   const prev=DATA.find(x=>x.num===n-1),next=DATA.find(x=>x.num===n+1);
